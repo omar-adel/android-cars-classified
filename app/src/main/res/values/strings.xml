@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">My Application</string>
+
+    //Add Cars
+    <string name="add_text_title">Title</string>
+    <string name="add_text_text">Text</string>
+    <string name="add_text_price">Price</string>
+    <string name="add_btn_text">ADD</string>
+
+
+</resources>
