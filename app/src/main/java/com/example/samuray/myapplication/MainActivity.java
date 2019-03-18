@@ -1,11 +1,13 @@
 package com.example.samuray.myapplication;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -16,15 +18,19 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+
+
+
+
 public class MainActivity extends AppCompatActivity {
 
+    public static Integer brand_id_var = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        AddPostServer();
     }
 
 
@@ -37,19 +43,44 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    public void onSelectBrandButtonClick(View view)
+    {
+        Intent intent = new Intent(this, BrandListActivity.class);
+        startActivityForResult(intent, 1);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (data == null) {return;}
+        Integer brand_id = data.getIntExtra("Brand_id_extra",0);
+        String brand_title = data.getStringExtra("Brand_name_extra");
+
+        brand_id_var = brand_id;
+
+        Button brand_button = (Button)findViewById(R.id.BrandBtn);
+        brand_button.setText(brand_title);
+
+    }
+
+
 
     public void AddPostServer() {
 
         
-        EditText et_add_title = (EditText)findViewById(R.id.add_ed_title);
-        EditText et_add_text = (EditText)findViewById(R.id.add_ed_text);
-        EditText et_add_price = (EditText)findViewById(R.id.add_ed_price);
+        final EditText et_add_title = (EditText)findViewById(R.id.add_ed_title);
+        final EditText et_add_text = (EditText)findViewById(R.id.add_ed_text);
+        final EditText et_add_price = (EditText)findViewById(R.id.add_ed_price);
 
 
-        String add_str_title = et_add_title.getText().toString();
-        String add_str_text = et_add_text.getText().toString();
-        int add_str_price = Integer.parseInt(et_add_price.getText().toString());
-//        int add_v_cena_uslugi =  Integer.parseInt(v_cena_uslugi.getText().toString());
+
+        final Integer add_str_brand = brand_id_var;
+        final String add_str_title = et_add_title.getText().toString();
+        final String add_str_text = et_add_text.getText().toString();
+
+
+        String price_before_format = et_add_price.getText().toString();
+        price_before_format = price_before_format.trim();
+        final int add_str_price = !add_str_text.equals("")?Integer.parseInt(price_before_format) : 0;
 
 
 
@@ -62,15 +93,15 @@ public class MainActivity extends AppCompatActivity {
         DjangoApi postApi= retrofit.create(DjangoApi.class);
 
 
-        CarModel postModel = new CarModel(
-                1,
+        CarModel carModel = new CarModel(
+                add_str_brand,
                 add_str_title,
                 add_str_text,
-                1
+                add_str_price
         );
 
 
-        Call<RequestBody> call = postApi.addPostVoditel(postModel);
+        Call<RequestBody> call = postApi.addCar(carModel);
 
         call.enqueue(new Callback<RequestBody>() {
             @Override

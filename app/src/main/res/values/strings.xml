@@ -5,6 +5,7 @@
     <string name="add_text_title">Title</string>
     <string name="add_text_text">Text</string>
     <string name="add_text_price">Price</string>
+    <string name="add_btn_brand_text">Select Brand</string>
     <string name="add_btn_text">ADD</string>
 
 

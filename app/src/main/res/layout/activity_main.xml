@@ -22,7 +22,9 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/add_ed_title"/>
+            android:id="@+id/add_ed_title"
+            android:text="Best BMW M5"
+            />
 
         <TextView
             android:layout_width="match_parent"
@@ -32,7 +34,9 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/add_ed_text"/>
+            android:id="@+id/add_ed_text"
+            android:text="Good car, for sale"
+            />
 
         <TextView
             android:layout_width="match_parent"
@@ -44,7 +48,15 @@
             android:layout_height="match_parent"
             android:id="@+id/add_ed_price"
             android:inputType="number"
-            android:text=""/>
+            android:text="5000"
+            />
+
+        <Button
+            android:id="@+id/BrandBtn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:onClick="onSelectBrandButtonClick"
+            android:text="@string/add_btn_brand_text"/>
 
         <Button
             android:layout_width="match_parent"

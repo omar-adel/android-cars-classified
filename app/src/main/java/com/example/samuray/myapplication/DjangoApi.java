@@ -1,8 +1,11 @@
 package com.example.samuray.myapplication;
 
+import java.util.List;
+
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface DjangoApi {
@@ -12,7 +15,10 @@ public interface DjangoApi {
 
 
     @POST("add/")
-    Call<RequestBody> addPostVoditel(@Body CarModel postModel);
+    Call<RequestBody> addCar(@Body CarModel carModel);
+
+    @GET("brand/list/")
+    Call<List<BrandModel>> getBrand();
 
 
 
